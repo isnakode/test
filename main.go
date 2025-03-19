@@ -8,12 +8,14 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cache"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 )
 
 func main() {
 	app := fiber.New()
 	app.Use(cors.New())
+	app.Use(cache.New())
 	client, dbErr := ent.Open("sqlite3", "darsuka.db?_fk=1")
 
 	if dbErr != nil {
